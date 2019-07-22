@@ -4,7 +4,11 @@ The intention of this repo is to provide a beginner-programmer-friendly way to e
 
 # Outline of Algorithm
 
+There are two major steps to the algorithm:
 
+1. Stippling (or 'pointillism') - the image is represented by small black dots of identical size in a way such that darker areas have more dots clustered closely together than lighter areas. The method used here is 'weighted voronoi stippling'.
+
+2. Drawing the Travelling Salesman Problem Path - the [Travelling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem) is a classic mathematical optimisation problem where given a list of locations, we are to find a single path that travels through all the locations only once and returns to the starting point. Here we use the dots drawn in the first step as our locations and use an algorithm called the 'nearest neighbour algorithm'.
 
 # Requirements & Instructions
 
@@ -12,7 +16,7 @@ At the bare minimum you'll need installed:
 
 * [Python 3](https://www.python.org/downloads/)
 * [Git](https://git-scm.com/)
-* Optional: [GIMP](https://www.gimp.org/) or any other appropriate image editing program. 
+* Optional: An appropriate image editing program e.g. [GIMP](https://www.gimp.org/)
 
 ## Installation Instructions
 
