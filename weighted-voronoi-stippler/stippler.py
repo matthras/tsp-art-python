@@ -99,6 +99,8 @@ if __name__ == '__main__':
         "display": False,
         "interactive": False,
         "pointsize": (1.0, 1.0),
+        "pdf": False,
+        "png": False
     }
 
     description = "Weighted Vororonoi Stippler"
@@ -132,6 +134,12 @@ if __name__ == '__main__':
     parser.add_argument('--interactive', action='store_true',
                         default=default["interactive"],
                         help='Display intermediate results (slower)')
+    parser.add_argument('--pdf', action='store_true', 
+                        default=default["pdf"], 
+                        help='Save image as pdf')
+    parser.add_argument('--png', action='store_true', 
+                        default=default["png"], 
+                        help='Save image as png')
     args = parser.parse_args()
 
     filename = args.filename
@@ -154,7 +162,7 @@ if __name__ == '__main__':
     basename = (os.path.basename(filename).split('.'))[0]
     pdf_filename = os.path.join(dirname, basename + "-stipple.pdf")
     png_filename = os.path.join(dirname, basename + "-stipple.png")
-    dat_filename = os.path.join(dirname, basename + "-stipple.npy")
+    dat_filename = os.path.join(dirname, basename + "-stipple.tsp")
 
     # Initialization
     if not os.path.exists(dat_filename) or args.force:
@@ -167,8 +175,10 @@ if __name__ == '__main__':
         print("Nb iterations: -")
     print("Density file: %s (resized to %dx%d)" % (
           filename, density.shape[1], density.shape[0]))
-    print("Output file (PDF): %s " % pdf_filename)
-    print("            (PNG): %s " % png_filename)
+    if (args.pdf): 
+        print("Output file (PDF): %s " % pdf_filename)
+    if (args.png):
+        print("            (PNG): %s " % png_filename)
     print("            (DAT): %s " % dat_filename)
 
         
@@ -209,9 +219,14 @@ if __name__ == '__main__':
             # Save result at last frame
             if (frame == args.n_iter-2 and
                       (not os.path.exists(dat_filename) or args.save)):
-                np.save(dat_filename, points)
-                plt.savefig(pdf_filename)
-                plt.savefig(png_filename)
+                #np.save(dat_filename, points) # Change to save as text file for TSP Concorde
+                tspfileheader = "NAME : " + filename + "\nTYPE : TSP\nCOMMENT: Stipple of " + filename + " with " + str(len(points)) + " points\nDIMENSION: " + str(len(points)) + "\nEDGE_WEIGHT_TYPE: ATT\nNODE_COORD_SECTION"
+                nodeindexes = np.arange(1,len(points)+1)[:,np.newaxis]
+                np.savetxt(dat_filename, np.concatenate((nodeindexes,points),axis=1), ['%d','%d','%d'], header=tspfileheader, footer="EOF", comments='')
+                if (args.pdf): 
+                    plt.savefig(pdf_filename)
+                if (args.png):
+                    plt.savefig(png_filename)
 
         bar = tqdm.tqdm(total=args.n_iter)
         animation = FuncAnimation(fig, update,
