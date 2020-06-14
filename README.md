@@ -2,6 +2,8 @@
 
 The intention of this repo is to provide a beginner-programmer-friendly way to enable people to make their own TSP Art using Python, and to highlight a few tips and tricks for bettering your art.
 
+The following is written assuming a system with Windows 10. Pull requests are welcome for Linux and MacOS.
+
 # Outline of Algorithm
 
 There are two major steps to the algorithm:
