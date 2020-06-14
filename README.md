@@ -8,15 +8,16 @@ There are two major steps to the algorithm:
 
 1. Stippling (or 'pointillism') - the image is represented by small black dots of identical size in a way such that darker areas have more dots clustered closely together than lighter areas. The method used here is 'weighted voronoi stippling'.
 
-2. Drawing the Travelling Salesman Problem Path - the [Travelling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem) is a classic mathematical optimisation problem where given a list of locations, we are to find a single path that travels through all the locations only once and returns to the starting point. Here we use the dots drawn in the first step as our locations and use an algorithm called the 'nearest neighbour algorithm'.
+2. Drawing the Travelling Salesman Problem Path - the [Travelling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem) is a classic mathematical optimisation problem where given a list of locations, we are to find a single path that travels through all the locations only once and returns to the starting point. Here we use the dots drawn in the first step as our locations and use the Concorde solver to draw an appropriate path.
 
 # Requirements & Instructions
 
 At the bare minimum you'll need installed:
 
 * [Python 3](https://www.python.org/downloads/)
-* [Git](https://git-scm.com/)
-* Optional: An appropriate image editing program e.g. [GIMP](https://www.gimp.org/)
+* [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde/index.html)
+* Optional: [Git](https://git-scm.com/)
+* Optional: Image editing program. Free/open-source ones: [Krita](https://krita.org/en/), [GIMP](https://www.gimp.org/)
 
 ## Installation Instructions
 
@@ -27,10 +28,7 @@ At the bare minimum you'll need installed:
 
 Skip this step if you're a first timer. This step will only be relevant after you've run through a few images and want to tweak things a little.
 
-What can sometimes happen is that visually there is not enough comparative density between different sections of the image, making it hard to properly identify areas where an image is meant to have more shading. The way to fix this is to increase the contrast on the image, and this can be done in GIMP.
-
-Some examples using the Twitter croissant emoji (which is also included in the input files):
-
+What can sometimes happen is that visually there is not enough comparative density between different sections of the image, making it hard to properly identify areas where an image is meant to have more shading. The way to fix this is to increase the contrast on the image, and this can be done in your image editing program.
 
 ### 2. Stippling
 
