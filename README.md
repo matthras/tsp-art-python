@@ -14,10 +14,8 @@ There are two major steps to the algorithm:
 
 # Requirements & Instructions
 
-At the bare minimum you'll need installed:
-
 * [Python 3](https://www.python.org/downloads/)
-* [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde/index.html)
+* Optional: [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde/index.html)
 * Optional: [Git](https://git-scm.com/)
 * Optional: Image editing program. Free/open-source ones: [Krita](https://krita.org/en/), [GIMP](https://www.gimp.org/)
 
