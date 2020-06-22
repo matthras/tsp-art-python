@@ -26,6 +26,12 @@ There are two major steps to the algorithm:
 
 For reference, we'll assume that the initial image is `figure.png` which is placed in the `images` folder.
 
+### 0. Setup 
+
+Download the repository by clicking the green 'Clone or Download' button, and select 'Download ZIP' and unzip to the folder of your choice. Alternatively if you have Git installed, `git clone https://github.com/matthras/tsp-art-python` into the folder of your choice.
+
+Install the required Python libraries by typing `pip install -r requirements.txt` 
+
 ### 1. Image Preprocessing
 
 Skip this step if you're a first timer. This step will only be relevant after you've run through a few images and want to tweak things a little.
