@@ -1,8 +1,8 @@
 from PIL import Image, ImageDraw
 
-ORIGINAL_IMAGE = "sample-images/figure.png"
-IMAGE_TSP = "sample-images/figure-stipple.tsp"
-IMAGE_CYC = "sample-images/figure-tour.cyc"
+ORIGINAL_IMAGE = "images/aboriginalflag.png"
+IMAGE_TSP = "images/aboriginalflag-stipple.tsp"
+IMAGE_CYC = "images/aboriginalflag.cyc"
 
 list_of_nodes = []
 
@@ -28,4 +28,4 @@ tsp_image_draw = ImageDraw.Draw(tsp_image)
 #tsp_image_draw.point(tsp_path,fill='black')
 tsp_image_draw.line(tsp_path,fill='black',width=1)
 tsp_image = tsp_image.transpose(Image.FLIP_TOP_BOTTOM)
-tsp_image.save("sample-images/figure-tsp.png")
+tsp_image.save("images/aboriginalflag-tsp.png")
