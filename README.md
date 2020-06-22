@@ -24,6 +24,8 @@ There are two major steps to the algorithm:
 
 ## Producing TSP Art Instructions
 
+For reference, we'll assume that the initial image is `figure.png` which is placed in the `images` folder.
+
 ### 1. Image Preprocessing
 
 Skip this step if you're a first timer. This step will only be relevant after you've run through a few images and want to tweak things a little.
@@ -35,6 +37,37 @@ What can sometimes happen is that visually there is not enough comparative densi
 
 ### 3. Drawing the TSP Solution
 
+#### Using OR-Tools in Python
+
+Open `draw-tsp-path.py` in your editor, and change the variables as follows:
+
+* `ORIGINAL_IMAGE` should be the same initial image you used for Step 2: `images/figure.png`
+* `IMAGE_TSP` should refer to the stipple `.tsp` file that is generated after Step 2: `images/figure-stipple.tsp`
+
+Run the file, wait for Python to do its job and when it's done, the final image will be generated as `images/figure-tsp.png`.
+
+#### Using Concorde (Windows GUI)
+
+Open Concorde either by double clicking on `figure-stipple.tsp` or opening the program separately and then loading `figure-stipple.tsp` file into it. Concorde should then display a series of dots that should resemble what you see in `figure-stipple.png`.
+
+There are two ways to go about this:
+
+1. [Recommended if you have more than 1024 points] Click on 'Heuristics' and select 'Lin Kernighan', then click OK.
+2. [NOT recommended if you have more than 1024 points] Click on 'Solver', uncheck Verbose, and click OK.
+
+Once Concorde has established an optimal tour, save the tour as a file by going `File > Save Tour`. In our example we'll save it as `figure-tour.cyc` (i.e. type 'figure-tour', click OK and the .cyc extension is automatically applied).
+
+Open `draw-tsp-path-concorde.py` in your editor and change the filenames at the top of the file
+
+* `ORIGINAL_IMAGE` should be the same initial image you used for Step 2: `images/figure.png`
+* `IMAGE_TSP` should refer to the stipple `.tsp` file that is generated after Step 2: `images/figure-stipple.tsp`
+* `IMAGE_CYC` should refer to the `.cyc` file that is generated from Concorde.
+
+Run the file and the script should generate the final image at `images/figure-tsp.png`.
+
+#### When do I use Concorde over OR-Tools?
+
+Generally speaking you'll only want to use Concorde over OR-Tools if you're looking for a better TSP result, at the cost of increased computational time. Sometimes the OR-Tools algorithm may result in paths that 'cross-over' areas where you don't want them to, whereas the Concorde solver won't. This is where I encourage experimenting a bit.
 
 ### 4. Touch-ups
 
