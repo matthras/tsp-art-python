@@ -143,26 +143,27 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     filename = args.filename
-    density = scipy.misc.imread(filename, flatten=True, mode='L')
+    density = scipy.misc.imread(filename, flatten=True, mode='L') # Flattens into a grayscale image, 8 bit pixels, black and white
 
     # We want (approximately) 500 pixels per voronoi region
-    zoom = (args.n_point * 500) / (density.shape[0]*density.shape[1])
+    zoom = (args.n_point * 500) / (density.shape[0]*density.shape[1]) # Dividing # of pixels*points by image dimensions
     zoom = int(round(np.sqrt(zoom)))
-    density = scipy.ndimage.zoom(density, zoom, order=0)
+    #density = scipy.ndimage.zoom(density, zoom, order=0) # This is the bit that resizes the image based on the calculations in the last two lines.
     # Apply threshold onto image
     # Any color > threshold will be white
-    density = np.minimum(density, args.threshold)
+    density = np.minimum(density, args.threshold) # Obtains minimum value for checking against threshold
 
     density = 1.0 - normalize(density)
-    density = density[::-1, :]
+    density = density[::-1, :] # Flips the image upside down? (why? Probably because image coordinate axes are upside down)
     density_P = density.cumsum(axis=1)
     density_Q = density_P.cumsum(axis=1)
 
+    # Setting filenames
     dirname = os.path.dirname(filename)
     basename = (os.path.basename(filename).split('.'))[0]
-    pdf_filename = os.path.join(dirname, basename + "-stipple.pdf")
-    png_filename = os.path.join(dirname, basename + "-stipple.png")
-    dat_filename = os.path.join(dirname, basename + "-stipple.tsp")
+    pdf_filename = os.path.join(dirname, basename + "-" + str(args.n_point) + "-stipple.pdf")
+    png_filename = os.path.join(dirname, basename + "-" + str(args.n_point) + "-stipple.png")
+    dat_filename = os.path.join(dirname, basename + "-" + str(args.n_point) + "-stipple.tsp")
 
     # Initialization
     if not os.path.exists(dat_filename) or args.force:
@@ -222,7 +223,7 @@ if __name__ == '__main__':
                 #np.save(dat_filename, points) # Change to save as text file for TSP Concorde
                 tspfileheader = "NAME : " + filename + "\nTYPE : TSP\nCOMMENT: Stipple of " + filename + " with " + str(len(points)) + " points\nDIMENSION: " + str(len(points)) + "\nEDGE_WEIGHT_TYPE: ATT\nNODE_COORD_SECTION"
                 nodeindexes = np.arange(1,len(points)+1)[:,np.newaxis]
-                np.savetxt(dat_filename, np.concatenate((nodeindexes,points),axis=1), ['%d','%d','%d'], header=tspfileheader, footer="EOF", comments='')
+                np.savetxt(dat_filename, np.concatenate((nodeindexes,points),axis=1), ['%d','%d','%d'], header=tspfileheader, comments='')
                 if (args.pdf): 
                     plt.savefig(pdf_filename)
                 if (args.png):
