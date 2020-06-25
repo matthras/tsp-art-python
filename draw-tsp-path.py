@@ -7,9 +7,12 @@ from ortools.constraint_solver import pywrapcp
 from PIL import Image, ImageDraw
 
 # Change these file names to the relevant files.
-ORIGINAL_IMAGE = "sample-images/figure.png"
-IMAGE_TSP = "sample-images/figure-stipple.tsp"
-OUTPUT_FILE = "sample-images/figure-tsp.png"
+ORIGINAL_IMAGE = "sample-images/smileyface-inverted.png"
+IMAGE_TSP = "sample-images/smileyface-inverted-2048-stipple.tsp"
+
+dirname = os.path.dirname(ORIGINAL_IMAGE)
+basename = (os.path.basename(ORIGINAL_IMAGE).split('.'))[0]
+FINAL_IMAGE = os.path.join(dirname,basename + "-tsp.png")
 
 def create_data_model():
     """Stores the data for the problem."""
@@ -89,7 +92,7 @@ def draw_routes(nodes, path):
     #tsp_image_draw.point(tsp_path,fill='black')
     tsp_image_draw.line(tsp_path,fill='black',width=1)
     tsp_image = tsp_image.transpose(Image.FLIP_TOP_BOTTOM)
-    tsp_image.save(OUTPUT_FILE)
+    tsp_image.save(FINAL_IMAGE)
 
 def main():
     """Entry point of the program."""

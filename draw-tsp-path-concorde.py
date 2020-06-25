@@ -1,8 +1,13 @@
 from PIL import Image, ImageDraw
+import os.path
 
 ORIGINAL_IMAGE = "images/aboriginalflag.png"
 IMAGE_TSP = "images/aboriginalflag-stipple.tsp"
 IMAGE_CYC = "images/aboriginalflag.cyc"
+
+dirname = os.path.dirname(ORIGINAL_IMAGE)
+basename = (os.path.basename(ORIGINAL_IMAGE).split('.'))[0]
+FINAL_IMAGE = os.path.join(dirname,basename + "-tsp.png")
 
 list_of_nodes = []
 
@@ -28,4 +33,4 @@ tsp_image_draw = ImageDraw.Draw(tsp_image)
 #tsp_image_draw.point(tsp_path,fill='black')
 tsp_image_draw.line(tsp_path,fill='black',width=1)
 tsp_image = tsp_image.transpose(Image.FLIP_TOP_BOTTOM)
-tsp_image.save("images/aboriginalflag-tsp.png")
+tsp_image.save(FINAL_IMAGE)
