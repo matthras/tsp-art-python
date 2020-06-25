@@ -7,7 +7,7 @@ IMAGE_CYC = "images/aboriginalflag.cyc"
 list_of_nodes = []
 
 with open(IMAGE_TSP) as f:
-  for _ in range(7):
+  for _ in range(6):
     next(f)
   for line in f:
     i,x,y = line.split()
