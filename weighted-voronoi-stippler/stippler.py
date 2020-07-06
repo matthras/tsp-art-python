@@ -101,6 +101,7 @@ if __name__ == '__main__':
         "pointsize": (1.0, 1.0),
         "pdf": False,
         "png": False
+        "npy": False
     }
 
     description = "Weighted Vororonoi Stippler"
@@ -140,6 +141,9 @@ if __name__ == '__main__':
     parser.add_argument('--png', action='store_true', 
                         default=default["png"], 
                         help='Save image as png')
+    parser.add_argument('--npy', action='store_true', 
+                        default=default["npy"], 
+                        help='Save points as npy file')
     args = parser.parse_args()
 
     filename = args.filename
@@ -220,7 +224,7 @@ if __name__ == '__main__':
             # Save result at last frame
             if (frame == args.n_iter-2 and
                       (not os.path.exists(dat_filename) or args.save)):
-                #np.save(dat_filename, points) # Change to save as text file for TSP Concorde
+                
                 tspfileheader = "NAME : " + filename + "\nTYPE : TSP\nCOMMENT: Stipple of " + filename + " with " + str(len(points)) + " points\nDIMENSION: " + str(len(points)) + "\nEDGE_WEIGHT_TYPE: ATT\nNODE_COORD_SECTION"
                 nodeindexes = np.arange(1,len(points)+1)[:,np.newaxis]
                 np.savetxt(dat_filename, np.concatenate((nodeindexes,points),axis=1), ['%d','%d','%d'], header=tspfileheader, comments='')
@@ -228,6 +232,8 @@ if __name__ == '__main__':
                     plt.savefig(pdf_filename)
                 if (args.png):
                     plt.savefig(png_filename)
+                if (args.npy):
+                    np.save(dat_filename, points)
 
         bar = tqdm.tqdm(total=args.n_iter)
         animation = FuncAnimation(fig, update,
@@ -259,9 +265,12 @@ if __name__ == '__main__':
 
         # Save stipple points and tippled image
         if not os.path.exists(dat_filename) or args.save:
-            np.save(dat_filename, points)
-            plt.savefig(pdf_filename)
-            plt.savefig(png_filename)
+            if (args.npy):
+                np.save(dat_filename, points)
+            if (args.pdf):
+                plt.savefig(pdf_filename)
+            if (args.png):
+                plt.savefig(png_filename)
 
         if args.display:
             plt.show()
