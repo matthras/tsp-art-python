@@ -89,7 +89,7 @@ Now compare the two results (look closely at the mouth to see the difference):
 
 Python | Concorde
 :-----:|:--------:
-![]("/sample-images/smileyface-inverted-1024-tsp (Python).png") | ![]("smileyface-inverted-1024-tsp (Concorde).png")
+![](/sample-images/smileyface-inverted-1024-tsp%20%28Python%29.png) | ![](/sample-images/smileyface-inverted-1024-tsp%20%28Concorde%29.png)
 
 ### 4. Touch-ups
 
