@@ -50,7 +50,7 @@ What should happen on your first time:
   * `figure-stipple.png` which is a stippled version of your original image, and
   * `figure-stipple.tsp` which is a record of the coordinates of each of the points. This is the file we need for the next step. 
 
-### 3. Drawing the TSP Solution
+### 3. Acquiring & Drawing the TSP Solution
 
 #### Using OR-Tools in Python
 
@@ -65,12 +65,9 @@ Run the file, wait for Python to do its job and when it's done, the final image 
 
 Open Concorde either by double clicking on `figure-stipple.tsp` or opening the program separately and then loading `figure-stipple.tsp` file into it. Concorde should then display a series of dots that should resemble what you see in `figure-stipple.png`.
 
-There are two ways to go about this:
+In the menu, click on 'Heuristics', select 'Lin Kernighan', then click OK. Concorde will then generate a tour that goes through all the points and returns to the starting point.
 
-1. [Recommended if you have more than 1024 points] Click on 'Heuristics' and select 'Lin Kernighan', then click OK.
-2. [NOT recommended if you have more than 1024 points] Click on 'Solver', uncheck Verbose, and click OK.
-
-Once Concorde has established an optimal tour, save the tour as a file by going `File > Save Tour`. In our example we'll save it as `figure-tour.cyc` (i.e. type 'figure-tour', click OK and the .cyc extension is automatically applied).
+Save the tour as a file by selecting in the menu: `File > Save Tour`. In our example we'll save it as `figure-tour.cyc`.
 
 Open `draw-tsp-path-concorde.py` in your editor and change the filenames at the top of the file
 
@@ -82,7 +79,17 @@ Run the file and the script should generate the final image at `images/figure-ts
 
 #### When do I use Concorde over OR-Tools?
 
-Generally speaking you'll only want to use Concorde over OR-Tools if you're looking for a better TSP result, at the cost of increased computational time. Sometimes the OR-Tools algorithm may result in paths that 'cross-over' areas where you don't want them to, whereas the Concorde solver won't. This is where I encourage experimenting a bit.
+Generally speaking you'll only want to use Concorde over OR-Tools if you have an image that has 'gaps' where you don't want a path to cross. Sometimes the OR-Tools algorithm may result in paths that 'cross-over' areas where you don't want them to, whereas the Concorde solver is less likely to achieve such a result.
+
+To demonstrate as an example, in the `sample-images` folder we have a `smileyface-inverted.png`:
+
+![](/sample-images/smileyface-inverted.png)
+
+Now compare the two results (look closely at the mouth to see the difference):
+
+Python | Concorde
+:-----:|:--------:
+![]("/sample-images/smileyface-inverted-1024-tsp (Python).png") | ![]("smileyface-inverted-1024-tsp (Concorde).png")
 
 ### 4. Touch-ups
 
