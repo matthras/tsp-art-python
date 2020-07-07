@@ -14,8 +14,8 @@ There are two major steps to the algorithm:
 
 # Requirements & Instructions
 
-* [Python 3](https://www.python.org/downloads/)
-* Optional: [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde/index.html)
+* [Python 3](https://www.python.org/downloads/) - you should also know how to use the console/command prompt, and run/execute a Python script.
+* Optional: [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde/index.html) 
 * Optional: [Git](https://git-scm.com/)
 * Optional: Image editing program. Free/open-source ones: [Krita](https://krita.org/en/), [GIMP](https://www.gimp.org/)
 
@@ -30,7 +30,7 @@ For reference, we'll assume that the initial image is `figure.png` which is plac
 
 Download the repository by clicking the green 'Clone or Download' button, and select 'Download ZIP' and unzip to the folder of your choice. Alternatively if you have Git installed, `git clone https://github.com/matthras/tsp-art-python` into the folder of your choice.
 
-Install the required Python libraries by typing `pip install -r requirements.txt` 
+Install the required Python libraries by typing into the console: `pip install -r requirements.txt` 
 
 ### 1. Image Preprocessing
 
@@ -40,6 +40,15 @@ What can sometimes happen is that visually there is not enough comparative densi
 
 ### 2. Stippling
 
+Open up `stippling.py` in the editor of your choice, and change the `ORIGINAL_FILE` variable to the folder and image that you wish to stipple. So if our image is `figure.png` located in the `images` folder, you'd rename the variable to `"images/figure.png"`
+
+What should happen on your first time: 
+
+* the console should show something similar to a progress bar, showing each iteration on a new line
+* a window will pop up and show the dots arranging themselves
+* closing aforementioned window will finish the script, and you should see two new files in the `images` folder: 
+  * `figure-stipple.png` which is a stippled version of your original image, and
+  * `figure-stipple.tsp` which is a record of the coordinates of each of the points. This is the file we need for the next step. 
 
 ### 3. Drawing the TSP Solution
 
