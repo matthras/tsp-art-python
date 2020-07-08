@@ -12,33 +12,30 @@ There are two major steps to the algorithm:
 
 2. Drawing the Travelling Salesman Problem Path - the [Travelling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem) is a classic mathematical optimisation problem where given a list of locations, we are to find a single path that travels through all the locations only once and returns to the starting point. Here we use the dots drawn in the first step as our locations and use the Concorde solver to draw an appropriate path.
 
-# Requirements & Instructions
+# Requirements
 
 * [Python 3](https://www.python.org/downloads/) - you should also know how to use the console/command prompt, and run/execute a Python script.
 * Optional: [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde/index.html) 
 * Optional: [Git](https://git-scm.com/)
 * Optional: Image editing program. Free/open-source ones: [Krita](https://krita.org/en/), [GIMP](https://www.gimp.org/)
 
-## Installation Instructions
-
-
-## Producing TSP Art Instructions
+# Producing Your TSP Art
 
 For reference, we'll assume that the initial image is `figure.png` which is placed in the `images` folder.
 
-### 0. Setup 
+## 0. Setup 
 
 Download the repository by clicking the green 'Clone or Download' button, and select 'Download ZIP' and unzip to the folder of your choice. Alternatively if you have Git installed, `git clone https://github.com/matthras/tsp-art-python` into the folder of your choice.
 
 Install the required Python libraries by typing into the console: `pip install -r requirements.txt` 
 
-### 1. Image Preprocessing
+## 1. Image Preprocessing
 
 Skip this step if you're a first timer. This step will only be relevant after you've run through a few images and want to tweak things a little.
 
 What can sometimes happen is that visually there is not enough comparative density between different sections of the image, making it hard to properly identify areas where an image is meant to have more shading. The way to fix this is to increase the contrast on the image, and this can be done in your image editing program.
 
-### 2. Stippling
+## 2. Stippling
 
 Open up `stippling.py` in the editor of your choice, and change the `ORIGINAL_FILE` variable to the folder and image that you wish to stipple. So if our image is `figure.png` located in the `images` folder, you'd rename the variable to `"images/figure.png"`
 
@@ -50,9 +47,9 @@ What should happen on your first time:
   * `figure-stipple.png` which is a stippled version of your original image, and
   * `figure-stipple.tsp` which is a record of the coordinates of each of the points. This is the file we need for the next step. 
 
-### 3. Acquiring & Drawing the TSP Solution
+## 3. Acquiring & Drawing the TSP Solution
 
-#### Using OR-Tools in Python
+### Using OR-Tools in Python
 
 Open `draw-tsp-path.py` in your editor, and change the variables as follows:
 
@@ -61,7 +58,7 @@ Open `draw-tsp-path.py` in your editor, and change the variables as follows:
 
 Run the file, wait for Python to do its job and when it's done, the final image will be generated as `images/figure-tsp.png`.
 
-#### Using Concorde (Windows GUI)
+### Using Concorde (Windows GUI)
 
 Open Concorde either by double clicking on `figure-stipple.tsp` or opening the program separately and then loading `figure-stipple.tsp` file into it. Concorde should then display a series of dots that should resemble what you see in `figure-stipple.png`.
 
@@ -91,12 +88,13 @@ Python | Concorde
 :-----:|:--------:
 ![](/sample-images/smileyface-inverted-1024-tsp%20%28Python%29.png) | ![](/sample-images/smileyface-inverted-1024-tsp%20%28Concorde%29.png)
 
-### 4. Touch-ups
+# Licenses to Acknowledge
 
-
-## Potential Problems
-
-
+* Google's OR-Tools is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+* [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde.html) is available for academic research use.
+* All code in the `weighted-voronoi-stippler` folder is obtained from https://github.com/ReScience-Archives/Rougier-2017, which has its own license: see `/weighted-voronoi-stippler/LICENSE.txt` for details.
+* My code: `draw-tsp-path.py`, `draw-tsp-path-concorde.py` and `stippling.py` is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) - basically if you use/remix my code, just make sure my name is in there somewhere for credit!
+* Images: The images in `images` and `sample-images` are under [MIT](https://opensource.org/licenses/MIT) - feel free to use/remix/modify them without attribution. Any images you produce using my code, by my understanding, should fall under any licences they're under that involve any kind of remixing/modification.
 
 # Collection of Reference Links
 
@@ -117,3 +115,5 @@ Python | Concorde
 [Jack Morris - Creating Travelling Salesman Art with Weighted Voronoi Stippling](http://jackxmorris.com/posts/traveling-salesman-art)
 
 [Craig S. Kaplan - TSP Art](http://www.cgl.uwaterloo.ca/csk/projects/tsp/)
+
+[OR-Tools & TSP](https://developers.google.com/optimization/routing/tsp)
