@@ -2,6 +2,7 @@
 # -----------------------------------------------------------------------------
 # Weighted Voronoi Stippler
 # Copyright (2017) Nicolas P. Rougier - BSD license
+# Edited by Matthew Mack
 #
 # Implementation of:
 #   Weighted Voronoi Stippling, Adrian Secord
@@ -42,8 +43,8 @@
 import tqdm
 import voronoi
 import os.path
-import scipy.misc
 import scipy.ndimage
+import imageio
 import numpy as np
 
 def normalize(D):
@@ -100,7 +101,7 @@ if __name__ == '__main__':
         "interactive": False,
         "pointsize": (1.0, 1.0),
         "pdf": False,
-        "png": False
+        "png": False,
         "npy": False
     }
 
@@ -147,7 +148,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     filename = args.filename
-    density = scipy.misc.imread(filename, flatten=True, mode='L') # Flattens into a grayscale image, 8 bit pixels, black and white
+    density = imageio.imread(filename, as_gray=True, pilmode='L') # Flattens into a grayscale image, 8 bit pixels, black and white
 
     # We want (approximately) 500 pixels per voronoi region
     zoom = (args.n_point * 500) / (density.shape[0]*density.shape[1]) # Dividing # of pixels*points by image dimensions
