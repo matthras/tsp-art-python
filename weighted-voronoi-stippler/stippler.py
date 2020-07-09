@@ -173,21 +173,18 @@ if __name__ == '__main__':
     # Initialization
     if not os.path.exists(dat_filename) or args.force:
         points = initialization(args.n_point, density)
-        print("Nb points:", args.n_point)
-        print("Nb iterations:", args.n_iter)
+        print("Number of points:", args.n_point)
+        print("Number of iterations:", args.n_iter)
     else:
         points = np.load(dat_filename)
-        print("Nb points:", len(points))
-        print("Nb iterations: -")
-    print("Density file: %s (resized to %dx%d)" % (
-          filename, density.shape[1], density.shape[0]))
+        print("Number of points:", len(points))
+        print("Number of iterations: -")
     if (args.pdf): 
-        print("Output file (PDF): %s " % pdf_filename)
+        print("PDF: %s " % pdf_filename)
     if (args.png):
-        print("            (PNG): %s " % png_filename)
-    print("            (DAT): %s " % dat_filename)
+        print("PNG: %s " % png_filename)
+    print("TSP: %s " % dat_filename)
 
-        
     xmin, xmax = 0, density.shape[1]
     ymin, ymax = 0, density.shape[0]
     bbox = np.array([xmin, xmax, ymin, ymax])
@@ -266,6 +263,9 @@ if __name__ == '__main__':
 
         # Save stipple points and tippled image
         if not os.path.exists(dat_filename) or args.save:
+            tspfileheader = "NAME : " + filename + "\nTYPE : TSP\nCOMMENT: Stipple of " + filename + " with " + str(len(points)) + " points\nDIMENSION: " + str(len(points)) + "\nEDGE_WEIGHT_TYPE: ATT\nNODE_COORD_SECTION"
+            nodeindexes = np.arange(1,len(points)+1)[:,np.newaxis]
+            np.savetxt(dat_filename, np.concatenate((nodeindexes,points),axis=1), ['%d','%d','%d'], header=tspfileheader, comments='')
             if (args.npy):
                 np.save(dat_filename, points)
             if (args.pdf):
