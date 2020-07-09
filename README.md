@@ -14,10 +14,18 @@ There are two major steps to the algorithm:
 
 # Requirements
 
-* [Python 3](https://www.python.org/downloads/) - you should also know how to use the console/command prompt, and run/execute a Python script.
+* [Python 3](https://www.python.org/downloads/) - you should also know how to use the console/command prompt, and run/execute a Python script. Note that command line options might be different for those using Anaconda.
 * Optional: [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde/index.html) 
 * Optional: [Git](https://git-scm.com/)
 * Optional: Image editing program. Free/open-source ones: [Krita](https://krita.org/en/), [GIMP](https://www.gimp.org/)
+
+And lastly, the image(s) that you want to convert!
+
+## What kind of images should I use for best results?
+
+*Format:* This will work for the common image formats (`.jpg`, `.png`). More obscure image formats might have some issues, so I'd recommend converting them to `.jpg` or `.png` first.
+
+*Type*: Generally you'll want to use images that is a single object against a white background. Colour doesn't matter as much since the image is converted to grayscale.
 
 # Producing Your TSP Art
 
@@ -27,7 +35,7 @@ For reference, we'll assume that the initial image is `figure.png` which is plac
 
 Download the repository by clicking the green 'Clone or Download' button, and select 'Download ZIP' and unzip to the folder of your choice. Alternatively if you have Git installed, `git clone https://github.com/matthras/tsp-art-python` into the folder of your choice.
 
-Install the required Python libraries by typing into the console: `pip install -r requirements.txt` 
+Install the required Python libraries by typing into the console: `pip install -r requirements.txt`. (if you know how to setup a Python environment feel free to do that first)
 
 ## 1. Image Preprocessing
 
@@ -80,7 +88,7 @@ Generally speaking you'll only want to use Concorde over OR-Tools if you have an
 
 To demonstrate as an example, in the `sample-images` folder we have a `smileyface-inverted.png`:
 
-![](/sample-images/smileyface-inverted.png)
+<div style="text-align:center"><img src="/sample-images/smileyface-inverted.png" width="500"></div>
 
 Now compare the two results (look closely at the mouth to see the difference):
 
