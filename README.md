@@ -10,7 +10,7 @@ There are two major steps to the algorithm:
 
 1. Stippling (or 'pointillism') - the image is represented by small black dots of identical size in a way such that darker areas have more dots clustered closely together than lighter areas. The method used here is 'weighted voronoi stippling'.
 
-2. Drawing the Travelling Salesman Problem Path - the [Travelling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem) is a classic mathematical optimisation problem where given a list of locations, we are to find a single path that travels through all the locations only once and returns to the starting point. Here we use the dots drawn in the first step as our locations and use the Concorde solver to draw an appropriate path.
+2. Determining and drawing the Travelling Salesman Problem Path - the [Travelling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem) is a classic mathematical optimisation problem where given a list of locations, we are to find a single path that travels through all the locations only once and returns to the starting point. Here we use the dots drawn in the first step as our locations and use an algorithm to determine then draw an appropriate path.
 
 # Requirements
 
@@ -25,15 +25,15 @@ And lastly, the image(s) that you want to convert!
 
 *Format:* This will work for the common image formats (`.jpg`, `.png`). More obscure image formats might have some issues, so I'd recommend converting them to `.jpg` or `.png` first.
 
-*Type*: Generally you'll want to use images that is a single object against a white background. Colour doesn't matter as much since the image is converted to grayscale.
+*Type*: Generally you'll want to use images that is a single object against a white background. Colour doesn't matter as much since the image is converted to grayscale as part of the stippling process.
 
 # Producing Your TSP Art
 
-For reference, we'll assume that the initial image is `figure.png` which is placed in the `images` folder.
+For reference, we'll assume that the initial image is `figure.png` which is placed in the `images` folder, making the filename `images/figure.png'.
 
 ## 0. Setup 
 
-Download the repository by clicking the green 'Clone or Download' button, and select 'Download ZIP' and unzip to the folder of your choice. Alternatively if you have Git installed, `git clone https://github.com/matthras/tsp-art-python` into the folder of your choice.
+Download the repository by clicking the green 'Code' button, then select 'Download ZIP' and unzip to the folder of your choice. Alternatively if you have Git installed, `git clone https://github.com/matthras/tsp-art-python` into the folder of your choice.
 
 Install the required Python libraries by typing into the console: `pip install -r requirements.txt`. (if you know how to setup a Python environment feel free to do that first)
 
@@ -52,8 +52,10 @@ What should happen on your first time:
 * the console should show something similar to a progress bar, showing each iteration on a new line
 * a window will pop up and show the dots arranging themselves
 * closing aforementioned window will finish the script, and you should see two new files in the `images` folder: 
-  * `figure-stipple.png` which is a stippled version of your original image, and
-  * `figure-stipple.tsp` which is a record of the coordinates of each of the points. This is the file we need for the next step. 
+  * `figure-1024-stipple.png` which is a stippled version of your original image, and
+  * `figure-1024-stipple.tsp` which is a record of the coordinates of each of the points. This is the file we need for the next step. 
+
+Note: `1024` refers to the number of dots used, assuming you use the initial settings as given. If you change this number, the resulting filenames will also have their numbers changed. This is to make it easier to experiment with different numbers of dots without constantly having to delete the old files.
 
 ## 3. Acquiring & Drawing the TSP Solution
 
@@ -61,14 +63,14 @@ What should happen on your first time:
 
 Open `draw-tsp-path.py` in your editor, and change the variables as follows:
 
-* `ORIGINAL_IMAGE` should be the same initial image you used for Step 2: `images/figure.png`
-* `IMAGE_TSP` should refer to the stipple `.tsp` file that is generated after Step 2: `images/figure-stipple.tsp`
+* `STIPPLED_IMAGE` should be the stippled image you obtained for Step 2: `images/figure-1024-stipple.png`
+* `IMAGE_TSP` should refer to the stipple `.tsp` file that is generated after Step 2: `images/figure-1024-stipple.tsp`
 
-Run the file, wait for Python to do its job and when it's done, the final image will be generated as `images/figure-tsp.png`.
+Run the file, wait for Python to do its job and when it's done, the final image will be generated as `images/figure-1024-tsp.png`.
 
 ### Using Concorde (Windows GUI)
 
-Open Concorde either by double clicking on `figure-stipple.tsp` or opening the program separately and then loading `figure-stipple.tsp` file into it. Concorde should then display a series of dots that should resemble what you see in `figure-stipple.png`.
+Open Concorde either by double clicking on `figure-1024-stipple.tsp` or opening the program separately and then loading `figure-1024-stipple.tsp` file into it. Concorde should then display a series of dots that should resemble what you see in `figure-1024-stipple.png`.
 
 In the menu, click on 'Heuristics', select 'Lin Kernighan', then click OK. Concorde will then generate a tour that goes through all the points and returns to the starting point.
 
@@ -76,11 +78,11 @@ Save the tour as a file by selecting in the menu: `File > Save Tour`. In our exa
 
 Open `draw-tsp-path-concorde.py` in your editor and change the filenames at the top of the file
 
-* `ORIGINAL_IMAGE` should be the same initial image you used for Step 2: `images/figure.png`
-* `IMAGE_TSP` should refer to the stipple `.tsp` file that is generated after Step 2: `images/figure-stipple.tsp`
-* `IMAGE_CYC` should refer to the `.cyc` file that is generated from Concorde.
+* `STIPPLED_IMAGE` should be the same initial image you used for Step 2: `images/figure-1024-stipple.png`
+* `IMAGE_TSP` should refer to the stipple `.tsp` file that is generated after Step 2: `images/figure-1024-stipple.tsp`
+* `IMAGE_CYC` should refer to the `.cyc` file that is generated from Concorde: `images/figure-tour.cyc`
 
-Run the file and the script should generate the final image at `images/figure-tsp.png`.
+Run the file and the script should generate the final image at `images/figure-1024-tsp.png`.
 
 #### When do I use Concorde over OR-Tools?
 
@@ -88,7 +90,7 @@ Generally speaking you'll only want to use Concorde over OR-Tools if you have an
 
 To demonstrate as an example, in the `sample-images` folder we have a `smileyface-inverted.png`:
 
-<div style="text-align:center"><img src="/sample-images/smileyface-inverted.png" width="500"></div>
+<div style="text-align: center;"><img src="/sample-images/smileyface-inverted.png" width="300"></div>
 
 Now compare the two results (look closely at the mouth to see the difference):
 
