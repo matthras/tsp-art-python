@@ -2,9 +2,9 @@
 from PIL import Image, ImageDraw
 import os.path
 
-STIPPLED_IMAGE = "images/aboriginalflag.png"
-IMAGE_TSP = "images/aboriginalflag-stipple.tsp"
-IMAGE_CYC = "images/aboriginalflag.cyc"
+ORIGINAL_IMAGE = "images/A.png"
+IMAGE_TSP = "images/A-500-stipple.tsp"
+IMAGE_CYC = "images/A-500-stipple.cyc"
 
 list_of_nodes = []
 
@@ -22,7 +22,7 @@ with open(IMAGE_CYC) as g:
     tsp_path.append(list_of_nodes[int(line)])
 tsp_path.append(list_of_nodes[0])
 
-original_image = Image.open(STIPPLED_IMAGE)
+original_image = Image.open(ORIGINAL_IMAGE)
 width, height = original_image.size
 
 tsp_image = Image.new("RGBA",(width,height),color='white')
@@ -32,3 +32,4 @@ tsp_image_draw.line(tsp_path,fill='black',width=1)
 tsp_image = tsp_image.transpose(Image.FLIP_TOP_BOTTOM)
 FINAL_IMAGE = IMAGE_TSP.replace("-stipple.tsp", "-tsp.png")
 tsp_image.save(FINAL_IMAGE)
+print("TSP solution has been drawn and can be viewed at", FINAL_IMAGE)
