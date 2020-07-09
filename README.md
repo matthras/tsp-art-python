@@ -1,3 +1,5 @@
+![](images/TSPArt-logo.png)
+
 # Travelling Salesman Problem (TSP) Art in Python
 
 The intention of this repo is to provide a beginner-programmer-friendly way to enable people to make their own TSP Art using Python, and to highlight a few tips and tricks for bettering your art.
@@ -8,7 +10,7 @@ The following is written assuming a system with Windows 10. Pull requests are we
 
 There are two major steps to the algorithm:
 
-1. Stippling (or 'pointillism') - the image is represented by small black dots of identical size in a way such that darker areas have more dots clustered closely together than lighter areas. The method used here is 'weighted voronoi stippling'.
+1. Stippling (or 'pointillism') - the image is represented by small black dots of identical size in a way such that darker areas have more dots clustered closely together than lighter areas. The algorithm used here is called 'weighted voronoi stippling'.
 
 2. Determining and drawing the Travelling Salesman Problem Path - the [Travelling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem) is a classic mathematical optimisation problem where given a list of locations, we are to find a single path that travels through all the locations only once and returns to the starting point. Here we use the dots drawn in the first step as our locations and use an algorithm to determine then draw an appropriate path.
 
