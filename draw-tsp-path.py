@@ -9,8 +9,8 @@ from PIL import Image, ImageDraw
 import os
 
 # Change these file names to the relevant files.
-STIPPLED_IMAGE = "images/flag-center.png"
-IMAGE_TSP = "images/flag-center-2048-stipple.tsp"
+ORIGINAL_IMAGE = "images/Tsmall.png"
+IMAGE_TSP = "images/Tsmall-500-stipple.tsp"
 
 def create_data_model():
     """Stores the data for the problem."""
@@ -79,7 +79,7 @@ def draw_routes(nodes, path):
     for location in path:
         tsp_path.append(nodes[int(location)])
 
-    original_image = Image.open(STIPPLED_IMAGE)
+    original_image = Image.open(ORIGINAL_IMAGE)
     width, height = original_image.size
 
     tsp_image = Image.new("RGBA",(width,height),color='white')
@@ -87,13 +87,14 @@ def draw_routes(nodes, path):
     #tsp_image_draw.point(tsp_path,fill='black')
     tsp_image_draw.line(tsp_path,fill='black',width=1)
     tsp_image = tsp_image.transpose(Image.FLIP_TOP_BOTTOM)
-    FINAL_IMAGE = IMAGE_TSP.replace("-stipple.tsp","tsp.png")
+    FINAL_IMAGE = IMAGE_TSP.replace("-stipple.tsp","-tsp.png")
     tsp_image.save(FINAL_IMAGE)
-    print("TSP solution has been drawn and can be viewed at ", FINAL_IMAGE)
+    print("TSP solution has been drawn and can be viewed at", FINAL_IMAGE)
 
 def main():
     """Entry point of the program."""
     # Instantiate the data problem.
+    print("Step 1/5: Initialising variables")
     data = create_data_model()
 
     # Create the routing index manager.
@@ -102,7 +103,7 @@ def main():
 
     # Create Routing Model.
     routing = pywrapcp.RoutingModel(manager)
-
+    print("Step 2/5: Computing distance matrix")
     distance_matrix = compute_euclidean_distance_matrix(data['locations'])
 
     def distance_callback(from_index, to_index):
@@ -118,19 +119,23 @@ def main():
     routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
 
     # Setting first solution heuristic.
+    print("Step 3/5: Setting an initial solution")
     search_parameters = pywrapcp.DefaultRoutingSearchParameters()
     search_parameters.first_solution_strategy = (
         routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC)
 
     # Solve the problem.
-    print("Now solving...this might take a while!")
+    print("Step 4/5: Solving")
     solution = routing.SolveWithParameters(search_parameters)
 
     # Print solution on console.
     if solution:
         #print_solution(manager, routing, solution)
+        print("Step 5/5: Drawing the solution")
         routes = get_routes(solution, routing, manager)
         draw_routes(data['locations'],routes)
+    else:
+        print("A solution couldn't be found :(")
     
 
 if __name__ == '__main__':
