@@ -1,18 +1,16 @@
 """Modified code from https://developers.google.com/optimization/routing/tsp#or-tools """
+# Copyright Matthew Mack (c) 2020 under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
 
 from __future__ import print_function
 import math
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 from PIL import Image, ImageDraw
+import os
 
 # Change these file names to the relevant files.
-ORIGINAL_IMAGE = "sample-images/smileyface-inverted.png"
-IMAGE_TSP = "sample-images/smileyface-inverted-2048-stipple.tsp"
-
-dirname = os.path.dirname(ORIGINAL_IMAGE)
-basename = (os.path.basename(ORIGINAL_IMAGE).split('.'))[0]
-FINAL_IMAGE = os.path.join(dirname,basename + "-tsp.png")
+STIPPLED_IMAGE = "images/flag-center.png"
+IMAGE_TSP = "images/flag-center-2048-stipple.tsp"
 
 def create_data_model():
     """Stores the data for the problem."""
@@ -31,7 +29,6 @@ def create_data_model():
     data['depot'] = 0
     return data
 
-
 def compute_euclidean_distance_matrix(locations):
     """Creates callback to return distance between points."""
     distances = {}
@@ -47,7 +44,6 @@ def compute_euclidean_distance_matrix(locations):
                                (from_node[1] - to_node[1]))))
     return distances
 
-
 def print_solution(manager, routing, solution):
     """Prints solution on console."""
     print('Objective: {}'.format(solution.ObjectiveValue()))
@@ -62,7 +58,6 @@ def print_solution(manager, routing, solution):
     plan_output += ' {}\n'.format(manager.IndexToNode(index))
     print(plan_output)
     plan_output += 'Objective: {}m\n'.format(route_distance)
-
 
 def get_routes(solution, routing, manager):
     """Get vehicle routes from a solution and store them in an array."""
@@ -84,7 +79,7 @@ def draw_routes(nodes, path):
     for location in path:
         tsp_path.append(nodes[int(location)])
 
-    original_image = Image.open(ORIGINAL_IMAGE)
+    original_image = Image.open(STIPPLED_IMAGE)
     width, height = original_image.size
 
     tsp_image = Image.new("RGBA",(width,height),color='white')
@@ -92,7 +87,9 @@ def draw_routes(nodes, path):
     #tsp_image_draw.point(tsp_path,fill='black')
     tsp_image_draw.line(tsp_path,fill='black',width=1)
     tsp_image = tsp_image.transpose(Image.FLIP_TOP_BOTTOM)
+    FINAL_IMAGE = IMAGE_TSP.replace("-stipple.tsp","tsp.png")
     tsp_image.save(FINAL_IMAGE)
+    print("TSP solution has been drawn and can be viewed at ", FINAL_IMAGE)
 
 def main():
     """Entry point of the program."""
@@ -126,6 +123,7 @@ def main():
         routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC)
 
     # Solve the problem.
+    print("Now solving...this might take a while!")
     solution = routing.SolveWithParameters(search_parameters)
 
     # Print solution on console.
@@ -133,7 +131,7 @@ def main():
         #print_solution(manager, routing, solution)
         routes = get_routes(solution, routing, manager)
         draw_routes(data['locations'],routes)
-
+    
 
 if __name__ == '__main__':
     main()
