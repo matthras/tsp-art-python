@@ -1,3 +1,5 @@
+# Copyright Matthew Mack (c) 2020 under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
+
 import os
 import sys
 cmd = sys.executable
@@ -18,7 +20,7 @@ NUMBER_OF_ITERATIONS = 25
 POINT_SIZE = "1.0 1.0"
 
 # Size of the window that shows the points and their iterations.
-FIGURE_SIZE = 6
+FIGURE_SIZE = 8
 
 # Sets a cutoff point X between black and white (0-255) where any value between X and 255 (white) is considered the 'background' and will not be 'covered' by a dot. 
 THRESHOLD = 255
