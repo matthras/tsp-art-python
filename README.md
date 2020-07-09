@@ -1,4 +1,4 @@
-![](images/TSPArt-logo.png)
+![](/sample-images/TSPArt-logo.png)
 
 # Travelling Salesman Problem (TSP) Art in Python
 
