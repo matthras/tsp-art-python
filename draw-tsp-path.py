@@ -9,8 +9,8 @@ from PIL import Image, ImageDraw
 import os
 
 # Change these file names to the relevant files.
-ORIGINAL_IMAGE = "images/Tsmall.png"
-IMAGE_TSP = "images/Tsmall-500-stipple.tsp"
+ORIGINAL_IMAGE = "images/smileyface-inverted.png"
+IMAGE_TSP = "images/smileyface-inverted-1024-stipple.tsp"
 
 def create_data_model():
     """Stores the data for the problem."""

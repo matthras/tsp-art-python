@@ -5,7 +5,7 @@ import sys
 cmd = sys.executable
 
 # The filename of the image you want to stipple goes here.
-ORIGINAL_FILE = "sample-images/greysmileyface.png"
+ORIGINAL_IMAGE = "images/smileyface-inverted.png"
 
 # Enables saving of images.
 SAVE_IMAGE = True

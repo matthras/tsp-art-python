@@ -2,9 +2,9 @@
 from PIL import Image, ImageDraw
 import os.path
 
-ORIGINAL_IMAGE = "images/A.png"
-IMAGE_TSP = "images/A-500-stipple.tsp"
-IMAGE_CYC = "images/A-500-stipple.cyc"
+ORIGINAL_IMAGE = "images/smileyface-inverted.png"
+IMAGE_TSP = "images/smileyface-inverted-1024-stipple.tsp"
+IMAGE_CYC = "images/smileyface-inverted-1024-stipple.cyc"
 
 list_of_nodes = []
 
