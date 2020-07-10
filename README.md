@@ -26,7 +26,7 @@ And lastly, the image(s) that you want to convert!
 ## Python Dependencies
 
 * Pillow
-* ortools
+* ortools (Note that this requires [Microsoft Visual C++ Redistributable for Visual Studio 2019, which can be found at the bottom of this link.](https://visualstudio.microsoft.com/downloads/?q=Visual+C%2B%2B+Redistributable+for+Visual+Studio))
 * tqdm
 * imageio
 * scipy
