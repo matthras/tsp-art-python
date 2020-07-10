@@ -1,4 +1,4 @@
-![](/sample-images/TSPArt-logo.png)
+![](TSPArt-logo.png)
 
 # Travelling Salesman Problem (TSP) Art in Python
 
@@ -21,23 +21,33 @@ There are two major steps to the algorithm:
 * Optional: [Git](https://git-scm.com/)
 * Optional: Image editing program. Free/open-source ones: [Krita](https://krita.org/en/), [GIMP](https://www.gimp.org/)
 
-And lastly, the image(s) that you want to convert!
+And lastly, the image(s) that you want to convert! 
+
+## Python Dependencies
+
+* Pillow
+* ortools
+* tqdm
+* imageio
+* scipy
 
 ## What kind of images should I use for best results?
 
-*Format:* This will work for the common image formats (`.jpg`, `.png`). More obscure image formats might have some issues, so I'd recommend converting them to `.jpg` or `.png` first.
+**Format:** This will work for the common image formats (`.jpg`, `.png`). More obscure image formats might have some issues, so I'd recommend converting them to `.jpg` or `.png` first.
 
-*Type*: Generally you'll want to use images that is a single object against a white background. Colour doesn't matter as much since the image is converted to grayscale as part of the stippling process.
+**Type**: Generally you'll want to use images that is a single object against a white background. Colour doesn't matter as much since the image is converted to grayscale as part of the stippling process.
+
+Three images are provided for you in the `images` folder for you to practise on and to observe results. The scripts are initially configured to use `smileyface-inverted.png` in the `images` folder, and you can get an idea of what the output might look like if you check the `example-output` folder.
 
 # Producing Your TSP Art
 
-For reference, we'll assume that the initial image is `figure.png` which is placed in the `images` folder, making the filename `images/figure.png'.
+For reference, we'll assume that the initial image is `figure.png` which is placed in the `images` folder, making the filename `images/figure.png'. Replace `figure.png` with whatever other images that you also place in the `images` folder.
 
 ## 0. Setup 
 
 Download the repository by clicking the green 'Code' button, then select 'Download ZIP' and unzip to the folder of your choice. Alternatively if you have Git installed, `git clone https://github.com/matthras/tsp-art-python` into the folder of your choice.
 
-Install the required Python libraries by typing into the console: `pip install -r requirements.txt`. (if you know how to setup a Python environment feel free to do that first)
+Install the required Python libraries by typing into the console: `pip install -r requirements.txt`. Alternatively, manually install the Python dependencies as listed above. If you know how to setup a Python environment feel free to do that first.
 
 ## 1. Image Preprocessing
 
@@ -47,7 +57,7 @@ What can sometimes happen is that visually there is not enough comparative densi
 
 ## 2. Stippling
 
-Open up `stippling.py` in the editor of your choice, and change the `ORIGINAL_FILE` variable to the folder and image that you wish to stipple. So if our image is `figure.png` located in the `images` folder, you'd rename the variable to `"images/figure.png"`
+Open up `stippling.py` in the editor of your choice, and change the `ORIGINAL_IMAGE` variable to the folder and image that you wish to stipple. So if our image is `figure.png` located in the `images` folder, you'd rename the variable to `"images/figure.png"`
 
 What should happen on your first time: 
 
@@ -65,7 +75,7 @@ Note: `1024` refers to the number of dots used, assuming you use the initial set
 
 Open `draw-tsp-path.py` in your editor, and change the variables as follows:
 
-* `STIPPLED_IMAGE` should be the stippled image you obtained for Step 2: `images/figure-1024-stipple.png`
+* `ORIGINAL_IMAGE` should be the stippled image you obtained for Step 2: `images/figure-1024-stipple.png`
 * `IMAGE_TSP` should refer to the stipple `.tsp` file that is generated after Step 2: `images/figure-1024-stipple.tsp`
 
 Run the file, wait for Python to do its job and when it's done, the final image will be generated as `images/figure-1024-tsp.png`.
@@ -80,7 +90,7 @@ Save the tour as a file by selecting in the menu: `File > Save Tour`. In our exa
 
 Open `draw-tsp-path-concorde.py` in your editor and change the filenames at the top of the file
 
-* `STIPPLED_IMAGE` should be the same initial image you used for Step 2: `images/figure-1024-stipple.png`
+* `ORIGINAL_IMAGE` should be the same initial image you used for Step 2: `images/figure-1024-stipple.png`
 * `IMAGE_TSP` should refer to the stipple `.tsp` file that is generated after Step 2: `images/figure-1024-stipple.tsp`
 * `IMAGE_CYC` should refer to the `.cyc` file that is generated from Concorde: `images/figure-tour.cyc`
 
@@ -90,23 +100,23 @@ Run the file and the script should generate the final image at `images/figure-10
 
 Generally speaking you'll only want to use Concorde over OR-Tools if you have an image that has 'gaps' where you don't want a path to cross. Sometimes the OR-Tools algorithm may result in paths that 'cross-over' areas where you don't want them to, whereas the Concorde solver is less likely to achieve such a result.
 
-To demonstrate as an example, in the `sample-images` folder we have a `smileyface-inverted.png`:
+To demonstrate as an example, in the `example-output` folder we have a `smileyface-inverted.png`:
 
-<div style="text-align: center;"><img src="/sample-images/smileyface-inverted.png" width="300"></div>
+<div style="text-align: center;"><img src="/example-output/smileyface-inverted.png" width="300"></div>
 
 Now compare the two results (look closely at the mouth to see the difference):
 
 Python | Concorde
 :-----:|:--------:
-![](/sample-images/smileyface-inverted-1024-tsp%20%28Python%29.png) | ![](/sample-images/smileyface-inverted-1024-tsp%20%28Concorde%29.png)
+![](/example-output/smileyface-inverted-1024-tsp%20%28Python%29.png) | ![](/example-output/smileyface-inverted-1024-tsp%20%28Concorde%29.png)
 
 # Licenses to Acknowledge
 
-* Google's OR-Tools is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+* Google's OR-Tools is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) - I believe that means you can still use the library, but if you modify any of its internal code for usage, then you'll have to abide by the license terms.
 * [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde.html) is available for academic research use.
 * All code in the `weighted-voronoi-stippler` folder is obtained from https://github.com/ReScience-Archives/Rougier-2017, which has its own license: see `/weighted-voronoi-stippler/LICENSE.txt` for details.
 * My code: `draw-tsp-path.py`, `draw-tsp-path-concorde.py` and `stippling.py` is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) - basically if you use/remix my code, just make sure my name is in there somewhere for credit!
-* Images: The images in `images` and `sample-images` are under [MIT](https://opensource.org/licenses/MIT) - feel free to use/remix/modify them without attribution. Any images you produce using my code, by my understanding, should fall under any licences they're under that involve any kind of remixing/modification.
+* Images: The images in `images` and `example-output` are under [MIT](https://opensource.org/licenses/MIT) - feel free to use/remix/modify them without attribution. Any images you produce using my code, by my understanding, should fall under any licences they're under that involve any kind of remixing/modification.
 
 # Collection of Reference Links
 
