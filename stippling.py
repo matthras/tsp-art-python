@@ -43,7 +43,7 @@ SAVE_AS_PDF = False
 # Saves the position of all points as a numpy array.
 SAVE_AS_NPY = False
 
-full_command = " weighted-voronoi-stippler/stippler.py " + ORIGINAL_FILE
+full_command = " weighted-voronoi-stippler/stippler.py " + ORIGINAL_IMAGE
 
 if(SAVE_IMAGE):
   full_command += " --save"
