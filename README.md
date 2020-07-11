@@ -2,7 +2,7 @@
 
 # Travelling Salesman Problem (TSP) Art in Python
 
-The intention of this repo is to provide a beginner-programmer-friendly way to enable people to make their own TSP Art using Python, and to highlight a few tips and tricks for bettering your art.
+The intention of this repo is to provide a beginner-programmer-friendly way to enable people to make their own TSP Art using Python, where you can put in any image and generate a version made purely out of dots, and then another version that connects all these dots in a single continuous line where the end points meet each other.
 
 The following is written assuming a system with Windows 10. Pull requests are welcome for Linux and MacOS.
 
@@ -49,11 +49,15 @@ Download the repository by clicking the green 'Code' button, then select 'Downlo
 
 Install the required Python libraries by typing into the console: `pip install -r requirements.txt`. Alternatively, manually install the Python dependencies as listed above. If you know how to setup a Python environment feel free to do that first.
 
-## 1. Image Preprocessing
+## 1. Image Preprocessing (and potential problems!)
 
-Skip this step if you're a first timer. This step will only be relevant after you've run through a few images and want to tweak things a little.
+Skip this step if you're a first timer. This step will only be relevant after you've run through a few images and want to tweak things a little, or have run into certain problems.
 
-What can sometimes happen is that visually there is not enough comparative density between different sections of the image, making it hard to properly identify areas where an image is meant to have more shading. The way to fix this is to increase the contrast on the image, and this can be done in your image editing program.
+**Images with transparent backgrounds**: You'll want to colour these backgrounds white in your image-editing program, as some transparent backgrounds are set to black by default.
+
+**Difficult to distinguish sections of similar colour/shade**: You may have seen this when trying out `croissant-emoji.png`. There's two ways to deal with this: one is to increase the number of dots available. The other is to increase the contrast or recolour sections appropriately using your image editing program. 
+
+**Compression noise/grain/artefacts**: Sometimes your initial image might not necessarily be smooth, or you'll see 'bits that aren't supposed to be there'. These vary a huge amount so there's no one surefire method for dealing with all of them. I know there are built-in methods in GIMP/Krita/Photoshop for dealing with them, but am no expert - usually the examples I work with are simple enough to manually clean using Brush and Fill tools. 
 
 ## 2. Stippling
 
@@ -114,7 +118,9 @@ Python | Concorde
 
 Robert (Bob) Bosch ([Website](http://www.dominoartwork.com/), [Twitter](https://twitter.com/baabbaash/)) for the [original TSP art idea](http://www2.oberlin.edu/math/faculty/bosch/tspart-page.html). He's also written a book [Opt Art](https://www.amazon.com/Opt-Art-Mathematical-Optimization-Visual/dp/0691164061) which I highly recommend!
 
-Adrian Secord ([Twitter](https://twitter.com/ajsecord)) for the weighted voronoi stippling algorithm. Nicholas Rougier ([Website](https://www.labri.fr/perso/nrougier/), [Twitter](https://twitter.com/NPRougier), [Github](https://github.com/rougier)) for the Python implementation
+Adrian Secord ([Twitter](https://twitter.com/ajsecord)) for the weighted voronoi stippling algorithm. Nicholas Rougier ([Website](https://www.labri.fr/perso/nrougier/), [Twitter](https://twitter.com/NPRougier), [Github](https://github.com/rougier)) for the Python implementation.
+
+See the Collection of Reference Links below for what I've found in my research while putting together this project.
 
 # Licenses
 
