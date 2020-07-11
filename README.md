@@ -110,7 +110,13 @@ Python | Concorde
 :-----:|:--------:
 ![](/example-output/smileyface-inverted-1024-tsp%20%28Python%29.png) | ![](/example-output/smileyface-inverted-1024-tsp%20%28Concorde%29.png)
 
-# Licenses to Acknowledge
+# Acknowledgements 
+
+Robert (Bob) Bosch ([Website](http://www.dominoartwork.com/), [Twitter](https://twitter.com/baabbaash/)) for the [original TSP art idea](http://www2.oberlin.edu/math/faculty/bosch/tspart-page.html). He's also written a book Opt Art which I highly recommend!
+
+Adrian Secord ([Twitter](https://twitter.com/ajsecord)) for the weighted voronoi stippling algorithm. Nicholas Rougier ([Website](https://www.labri.fr/perso/nrougier/), [Twitter](https://twitter.com/NPRougier), [Github](https://github.com/rougier)) for the Python implementation
+
+# Licenses
 
 * Google's OR-Tools is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) - I believe that means you can still use the library, but if you modify any of its internal code for usage, then you'll have to abide by the license terms.
 * [Concorde TSP Solver](http://www.math.uwaterloo.ca/tsp/concorde.html) is available for academic research use.
