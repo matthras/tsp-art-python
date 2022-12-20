@@ -30,6 +30,7 @@ And lastly, the image(s) that you want to convert!
 * tqdm
 * imageio
 * scipy
+* matplotlib
 
 ## What kind of images should I use for best results?
 
