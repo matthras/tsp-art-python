@@ -43,6 +43,9 @@ SAVE_AS_PDF = False
 # Saves the position of all points as a numpy array.
 SAVE_AS_NPY = False
 
+# Saves the animation of the weighted voronoi algorithm which shows the stippling dots moving into position
+SAVE_ANIMATION = True
+
 full_command = " weighted-voronoi-stippler/stippler.py " + ORIGINAL_IMAGE
 
 if(SAVE_IMAGE):
@@ -64,5 +67,7 @@ if(SAVE_AS_PDF):
   full_command += " --pdf"
 if(SAVE_AS_NPY):
   full_command += " --npy"
+if(SAVE_ANIMATION):
+  full_command += " --save_stippling_animation"
 
 os.system(cmd + full_command)

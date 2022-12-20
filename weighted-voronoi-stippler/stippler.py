@@ -102,7 +102,8 @@ if __name__ == '__main__':
         "pointsize": (1.0, 1.0),
         "pdf": False,
         "png": False,
-        "npy": False
+        "npy": False,
+        "save_animation": False
     }
 
     description = "Weighted Vororonoi Stippler"
@@ -145,6 +146,9 @@ if __name__ == '__main__':
     parser.add_argument('--npy', action='store_true', 
                         default=default["npy"], 
                         help='Save points as npy file')
+    parser.add_argument('--save_stippling_animation', action='store_true', 
+                        default=default["save_animation"], 
+                        help='Saves the animation of the weighted voronoi algorithm which shows the stippling dots moving into position')
     args = parser.parse_args()
 
     filename = args.filename
@@ -169,6 +173,7 @@ if __name__ == '__main__':
     pdf_filename = os.path.join(dirname, basename + "-" + str(args.n_point) + "-stipple.pdf")
     png_filename = os.path.join(dirname, basename + "-" + str(args.n_point) + "-stipple.png")
     dat_filename = os.path.join(dirname, basename + "-" + str(args.n_point) + "-stipple.tsp")
+    animation_filename = os.path.join(dirname, basename + "-" + str(args.n_point) + "-animation.gif")
 
     # Initialization
     if not os.path.exists(dat_filename) or args.force:
@@ -236,6 +241,7 @@ if __name__ == '__main__':
         bar = tqdm.tqdm(total=args.n_iter)
         animation = FuncAnimation(fig, update,
                                   repeat=False, frames=args.n_iter-1)
+        animation.save(animation_filename)
         plt.show()
 
     elif not os.path.exists(dat_filename) or args.force:
